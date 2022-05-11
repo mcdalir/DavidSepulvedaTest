@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Cheese : Character
 {
+	//Starting height for visual representation
 	public float startingHeight;
 
 	public override void Start()
@@ -13,6 +14,7 @@ public class Cheese : Character
 		startingHeight = transform.localScale.z;
 	}
 
+	//Receive damage and update the height
 	public override void TakeDamage(float damage)
 	{
 		base.TakeDamage(damage);

@@ -4,14 +4,18 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+//This script feeds the inventory of defenses we can use
 public class InventoryItemUI : MonoBehaviour
 {
+	//Displays stock
 	public TMP_Text qtyText;
+	//Displays the time for the new element to be added to its inventory stock
 	[SerializeField] private Image restockProgress;
-
+	//Restock interval
 	[SerializeField] private float restockInterval = 5f;
 	[SerializeField] public DefenseType defenseType;
-	[SerializeField] private float restockTime;
+	//Time before add the item to the inventory
+	private float restockTime;
 
 	private void Start()
 	{

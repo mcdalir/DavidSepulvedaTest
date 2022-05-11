@@ -5,9 +5,8 @@ using UnityEngine;
 public class Rat : Character
 {
 	[SerializeField] private float speed;
-	[SerializeField] private LayerMask layerMask;
 
-
+	//Detect a character to attack him
 	private void OnTriggerEnter(Collider other)
 	{
 		Character target = other.GetComponent<Character>();
@@ -16,6 +15,7 @@ public class Rat : Character
 		attacking = true;
 	}
 
+	//Remove attacked character an continue moving
 	private void OnTriggerExit(Collider other)
 	{
 		Character target = other.GetComponent<Character>();
@@ -39,6 +39,7 @@ public class Rat : Character
 			transform.Translate(transform.forward * speed * Time.smoothDeltaTime);
 	}
 
+	//Set character attributes
 	public void SetAttributes(RatAttributes attr)
 	{
 		speed = attr.speed;

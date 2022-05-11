@@ -2,16 +2,15 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Character that we can use to protect the cheese
 public class Defense : Character
 {
-	//[SerializeField] private Transform rod;
 	[SerializeField] private DefenseType defenseType;
+	//Graphics to be displayed regarding defenseType
 	[SerializeField] private List<DefenseGraphics> defenseGraphics;
 
+	//Initialize this character and set its attributes
 	private bool initialized;
-	private new Collider collider;
-
-
 	public void Initialize(DefenseAttributes attributes)
 	{
 		defenseType = attributes.defenseType;
@@ -19,7 +18,6 @@ public class Defense : Character
 		attackPower = attributes.attackPower;
 		attackInterval = attributes.attackInterval;
 		initialized = true;
-		collider = GetComponent<Collider>();
 
 		DefenseGraphics found = defenseGraphics.Find(x => x.defenseType == attributes.defenseType);
 
@@ -27,6 +25,7 @@ public class Defense : Character
 			found.armed.SetActive(true);
 	}
 
+	//Detect an upcoming enemy
 	private void OnTriggerEnter(Collider other)
 	{
 		if (!initialized) return;
@@ -53,6 +52,7 @@ public class Defense : Character
 		}
 	}
 
+	//Attack listed enemies while there are at least one colliding with this character
 	private void OnTriggerStay(Collider other)
 	{
 		if (!initialized) return;

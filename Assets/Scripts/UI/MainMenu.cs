@@ -9,10 +9,13 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+	//Loading image
 	[SerializeField] private Image loadingFill;
+	//Black background meant to be faded out after the game is loaded
 	[SerializeField] private Image background;
 	[SerializeField] private Button playButton;
 	[SerializeField] private Button exitButton;
+	//Game name
 	[SerializeField] private TMP_Text title;
 
 	private void Start()
@@ -21,6 +24,7 @@ public class MainMenu : MonoBehaviour
 		exitButton.onClick.AddListener(Exit);
 	}
 
+	//Load game level and play menu animations before that
 	public void Play()
 	{
 		LeanTween.moveLocalY(title.gameObject, 0f, .5f)
@@ -32,6 +36,7 @@ public class MainMenu : MonoBehaviour
 		exitButton.gameObject.SetActive(false);
 	}
 
+	//Load the level and get its progress to update de loading image
 	private async void LoadLevel(string level, Action callback)
 	{
 		AsyncOperation loadingScene = SceneManager.LoadSceneAsync(level, LoadSceneMode.Additive);
@@ -46,11 +51,13 @@ public class MainMenu : MonoBehaviour
 		callback.Invoke();
 	}
 
+	//unload the loaded level
 	private void UnloadLevel(string level)
 	{
 		SceneManager.UnloadSceneAsync(level);
 	}
 
+	//Called after the game level is loaded
 	private void OnLevelLoaded()
 	{
 		LeanTween.delayedCall(1f, () =>
@@ -68,6 +75,7 @@ public class MainMenu : MonoBehaviour
 		});
 	}
 
+	//Quit application
 	public void Exit()
 	{
 		Application.Quit();

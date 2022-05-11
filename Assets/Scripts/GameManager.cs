@@ -12,33 +12,46 @@ public class GameManager : MonoBehaviour
 	[Header("References")]
 	[SerializeField] private Camera mainCamera;
 	[SerializeField] private Camera UICamera;
+	//Performance information
 	[SerializeField] private GameObject graphy;
+	//Rat prefab for enemy instantiation
 	[SerializeField] private GameObject ratPrefab;
+	//Defense prefab for traps instatiation
 	[SerializeField] private GameObject defensePrefab;
+	//Inventory UI for for trap selection
 	[SerializeField] private GameObject inventoryUI;
+	//The object that we must protect
 	[SerializeField] private Cheese cheese;
+	//Informative text
 	[SerializeField] private TMP_Text gameOverText;
 
 	[Header("Game variables")]
+	//Inventory
 	[SerializeField] private List<InventoryItem> defenseInventory;
+	//The type of the selected defense
 	[SerializeField] private DefenseType selectedDefense;
+	//Attributes for instantiated defenses
 	[SerializeField] private List<DefenseAttributes> defenseAttributes;
+	//Attributes for instantiated enemies
 	[SerializeField] private List<RatAttributes> ratAttributes;
+	//Setting for all rounds
 	[SerializeField] private List<Wave> waves;
-	//private List<Defense> activeDefenses;
+	//Enemies interval
 	[SerializeField] private float currentInterval;
 	[SerializeField] private float elapsedFromLastRat;
 	private int currentWave;
-	[SerializeField] private bool canWave;
-	[SerializeField] private bool canPlay;
+	//Can instantiate enemies or set next wave
+	private bool canWave;
+	//The player can play
+	private bool canPlay;
 	public static bool CanPlay => instance.canPlay;
 
+	//Pre set some variables
 	private void Awake()
 	{
 		if (instance != null)
 			Destroy(instance);
 		instance = this;
-		//activeDefenses = new List<Defense>();
 		selectedDefense = DefenseType.None;
 		gameOverText.transform.localScale = Vector3.zero;
 		inventoryUI.gameObject.SetActive(false);
